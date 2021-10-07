@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.buyapp.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,16 +19,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupRecyclerView()
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        viewModel.shopList.observe(this){shopList ->
+        viewModel.shopList.observe(this) { shopList ->
             shopListAdapter.submitList(shopList)
+        }
+
+        val buttonAddItem = findViewById<FloatingActionButton>(R.id.button_add_shop_item)
+        buttonAddItem.setOnClickListener {
+            val intent = ShopItemActivity.newIntentAddItem(this)
+            startActivity(intent)
         }
 
     }
 
-    private fun setupRecyclerView(){
+    private fun setupRecyclerView() {
         val rvShopList = findViewById<RecyclerView>(R.id.rv_shop_list)
         shopListAdapter = ShopListAdapter()
-        with(rvShopList){
+        with(rvShopList) {
             adapter = shopListAdapter
             //set max size for recycledViewPool
             recycledViewPool.setMaxRecycledViews(
@@ -74,6 +81,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupClickListener() {
         shopListAdapter.onShopItemClickListener = {
             Log.d(TAG, "item ${it.id}")
+            val intent = ShopItemActivity.newIntenteditItem(this, it.id)
+            startActivity(intent)
         }
     }
 
@@ -83,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    companion object{
+    companion object {
         const val TAG = "MainActivity"
     }
 }
