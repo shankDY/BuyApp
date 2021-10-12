@@ -3,6 +3,8 @@ package com.example.buyapp.presentation
 import androidx.recyclerview.widget.DiffUtil
 import com.example.buyapp.domain.ShopItem
 
+
+//Compared item list
 class ShopItemDiffCallback: DiffUtil.ItemCallback<ShopItem>() {
 
     override fun areItemsTheSame(oldItem: ShopItem, newItem: ShopItem): Boolean =
