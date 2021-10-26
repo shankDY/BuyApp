@@ -3,11 +3,12 @@ package com.example.buyapp.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.buyapp.R
 import com.example.buyapp.domain.ShopItem
 
-class ShopItemActivity : AppCompatActivity() {
+class ShopItemActivity : AppCompatActivity(), ShopItemFragment.onEditingFinishedListener {
 
 
     private var screenMode = MODE_UNKNOWN
@@ -82,5 +83,9 @@ class ShopItemActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun onEditingFinished() {
+        finish()
     }
 }
